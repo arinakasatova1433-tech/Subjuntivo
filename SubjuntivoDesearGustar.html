@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subjuntivo – gustos y deseos</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Roboto, system-ui, sans-serif; background: #f7f3f0; color: #2d2a2a; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; }
+        .container { max-width: 900px; width: 100%; background: white; border-radius: 28px; box-shadow: 0 12px 30px rgba(0,0,0,0.12); padding: 30px 35px; margin-bottom: 30px; }
+        h1 { font-size: 2rem; font-weight: 600; color: #b34a4a; border-bottom: 3px solid #f0d6d6; padding-bottom: 12px; margin-bottom: 25px; }
+        h2 { font-size: 1.3rem; font-weight: 600; color: #4a3a3a; margin: 25px 0 15px 0; border-left: 6px solid #b34a4a; padding-left: 15px; }
+        .exercise { background: #faf8f7; border-radius: 18px; padding: 20px 25px; margin: 20px 0 10px 0; border: 1px solid #e6dbd8; }
+        .exercise label { display: block; font-weight: 500; margin: 12px 0 4px 0; color: #3d2e2e; }
+        .exercise input[type="text"] { width: 100%; padding: 10px 14px; border: 2px solid #ddd2cf; border-radius: 12px; font-size: 1rem; background: white; transition: 0.2s; }
+        .exercise input[type="text"]:focus { outline: none; border-color: #b34a4a; box-shadow: 0 0 0 3px rgba(179,74,74,0.15); }
+        .btn { background: #b34a4a; color: white; border: none; padding: 12px 28px; border-radius: 40px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: 0.15s; margin-top: 18px; margin-right: 12px; box-shadow: 0 4px 8px rgba(179,74,74,0.25); }
+        .btn:hover { background: #9e3d3d; transform: scale(1.02); }
+        .feedback { margin-top: 18px; padding: 15px 20px; border-radius: 14px; background: #f0ecea; border-left: 6px solid #b34a4a; font-size: 0.95rem; line-height: 1.6; display: none; }
+        .feedback.show { display: block; }
+        .feedback .correct { color: #1f7a3a; font-weight: 500; }
+        .feedback .wrong { color: #b34a4a; font-weight: 500; }
+        .feedback .answer-row { padding: 3px 0; border-bottom: 1px solid #ddd2cf; }
+        .feedback .answer-row:last-child { border-bottom: none; }
+        .grammar-input { margin-bottom: 14px; }
+        .grammar-input label { display: inline-block; width: auto; font-weight: 400; margin-right: 6px; }
+        .grammar-input input { width: 140px; display: inline-block; }
+        @media (max-width: 500px) { .grammar-input input { width: 100%; } }
+        .highlight-verb { background: #fce3d6; padding: 0 4px; border-radius: 4px; font-weight: 600; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🎯 Subjuntivo con <span class="highlight-verb">desear, querer, preferir, gustar, molar, molestar, chiflar</span></h1>
+    <div class="exercise">
+        <p><em>Вставьте форму <strong>presente de subjuntivo</strong> глагола в скобках. Все предложения выражают желания, предпочтения или эмоции.</em></p>
+        <div id="subj-container">
+            <div class="grammar-input">
+                <label>1. Deseo que tú <strong>(ser)</strong> más sincero.</label>
+                <input type="text" id="subj1" placeholder="ej. seas">
+            </div>
+            <div class="grammar-input">
+                <label>2. Quiero que ella <strong>(venir)</strong> a la fiesta.</label>
+                <input type="text" id="subj2" placeholder="ej. venga">
+            </div>
+            <div class="grammar-input">
+                <label>3. Prefiero que él <strong>(tratar)</strong> bien a los demás.</label>
+                <input type="text" id="subj3" placeholder="ej. trate">
+            </div>
+            <div class="grammar-input">
+                <label>4. Me gusta que ellos <strong>(entender)</strong> mis sentimientos.</label>
+                <input type="text" id="subj4" placeholder="ej. entiendan">
+            </div>
+            <div class="grammar-input">
+                <label>5. Me mola que nosotros <strong>(aprender)</strong> a perdonar.</label>
+                <input type="text" id="subj5" placeholder="ej. aprendamos">
+            </div>
+            <div class="grammar-input">
+                <label>6. Me molesta que ella <strong>(tener)</strong> siempre razón.</label>
+                <input type="text" id="subj6" placeholder="ej. tenga">
+            </div>
+            <div class="grammar-input">
+                <label>7. Me chifla que tú <strong>(permitir)</strong> que nadie te ridiculice.</label>
+                <input type="text" id="subj7" placeholder="ej. permitas">
+            </div>
+            <div class="grammar-input">
+                <label>8. Quiero que <strong>(hablar)</strong> claro. (tú)</label>
+                <input type="text" id="subj8" placeholder="ej. hables">
+            </div>
+            <div class="grammar-input">
+                <label>9. Prefiero que <strong>(poder)</strong> olvidar el pasado. (él)</label>
+                <input type="text" id="subj9" placeholder="ej. pueda">
+            </div>
+            <div class="grammar-input">
+                <label>10. Deseo que tú <strong>(hacer)</strong> eso.</label>
+                <input type="text" id="subj10" placeholder="ej. hagas">
+            </div>
+        </div>
+        <button class="btn" onclick="checkSubjuntivo()">🎮 Проверить</button>
+        <div id="subj-feedback" class="feedback"></div>
+    </div>
+</div>
+<script>
+    function checkSubjuntivo() {
+        const correctForms = {
+            subj1: 'seas',
+            subj2: 'venga',
+            subj3: 'trate',
+            subj4: 'entiendan',
+            subj5: 'aprendamos',
+            subj6: 'tenga',
+            subj7: 'permitas',
+            subj8: 'hables',
+            subj9: 'pueda',
+            subj10: 'hagas'
+        };
+        const feedback = document.getElementById('subj-feedback');
+        let html = '<div class="feedback show"><strong>🎯 Проверка Subjuntivo:</strong><br>';
+        let total = Object.keys(correctForms).length;
+        let correct = 0;
+        for (const [id, correctVal] of Object.entries(correctForms)) {
+            const input = document.getElementById(id);
+            const user = input.value.trim().toLowerCase();
+            const isCorrect = user === correctVal;
+            if (isCorrect) {
+                correct++;
+                html += `<div class="answer-row"><span class="correct">✅ ${id.replace('subj','')}. → ${user}</span></div>`;
+            } else {
+                html += `<div class="answer-row"><span class="wrong">❌ ${id.replace('subj','')}. → ${user || '(пусто)'} (правильно: ${correctVal})</span></div>`;
+            }
+        }
+        html += `<br><strong>Правильно: ${correct} из ${total}</strong>`;
+        if (correct < total) {
+            html += `<br><span style="color:#b34a4a;">📘 Повторите неправильные формы.</span>`;
+        } else {
+            html += `<br><span style="color:#1f7a3a;">🎉 ¡Perfecto! Has dominado el subjuntivo con gustos y deseos.</span>`;
+        }
+        html += '</div>';
+        feedback.innerHTML = html;
+        feedback.classList.add('show');
+    }
+</script>
+</body>
+</html>
