@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El mejor regalo – Video</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #e6f2f7;
+            color: #0a2a3b;
+            padding: 2rem 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            border-bottom: 4px solid #1a73e8;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            color: #0a2a3b;
+            text-align: center;
+        }
+        .task {
+            background: #f0f8ff;
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.15);
+            border: 1px solid #b3d9ff;
+        }
+        .task h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1a73e8;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .task h2 span {
+            background: #1a73e8;
+            color: white;
+            font-size: 1rem;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+        }
+        .exercise-block {
+            background: #ffffff;
+            padding: 1.2rem 1.5rem;
+            border-radius: 14px;
+            margin: 1rem 0;
+            border-left: 5px solid #1a73e8;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.4rem 0.8rem;
+            margin: 0.5rem 0;
+        }
+        .input-group label {
+            font-weight: 500;
+            min-width: 20px;
+        }
+        .input-group input, .input-group select {
+            padding: 0.3rem 0.6rem;
+            border: 2px solid #b3d9ff;
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 180px;
+            transition: border-color 0.2s;
+            background: white;
+        }
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+        .input-group .result-icon {
+            font-size: 1.2rem;
+            margin-left: 0.3rem;
+            min-width: 30px;
+        }
+        .input-group .correct-answer {
+            font-size: 0.9rem;
+            color: #0d6b3e;
+            background: #d4edda;
+            padding: 0.1rem 0.6rem;
+            border-radius: 12px;
+            display: none;
+        }
+        .input-group .correct-answer.show {
+            display: inline-block;
+        }
+        .task .check-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 0.5rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 0.8rem;
+        }
+        .task .check-btn:hover {
+            background: #0d47a1;
+        }
+        .tag {
+            display: inline-block;
+            background: #b3d9ff;
+            color: #0a2a3b;
+            font-size: 0.75rem;
+            padding: 0.1rem 0.7rem;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            margin-right: 0.5rem;
+            text-transform: uppercase;
+        }
+        hr {
+            border: none;
+            border-top: 2px dotted #b3d9ff;
+            margin: 1.5rem 0;
+        }
+        .correct-input {
+            border-color: #2d7d46 !important;
+            background: #f0faf2;
+        }
+        .wrong-input {
+            border-color: #c0392b !important;
+            background: #fdf0ef;
+        }
+
+        /* Стиль для телевизора */
+        .tv-container {
+            background: #1a1a2e;
+            border-radius: 40px 40px 20px 20px;
+            padding: 25px 25px 35px 25px;
+            margin: 1.5rem 0 2rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 10px rgba(255,255,255,0.1);
+            position: relative;
+            border: 3px solid #2c2c4a;
+        }
+        .tv-container::before {
+            content: "";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 20px;
+            background: #2c2c4a;
+            border-radius: 10px 10px 0 0;
+            box-shadow: inset 0 -4px 6px rgba(0,0,0,0.5);
+        }
+        .tv-container::after {
+            content: "";
+            position: absolute;
+            bottom: 10px;
+            right: 30px;
+            width: 8px;
+            height: 8px;
+            background: #1a73e8;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #1a73e8;
+            opacity: 0.7;
+        }
+        .tv-screen {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            background: #000;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+        }
+        .tv-screen iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .tv-stand {
+            width: 120px;
+            height: 10px;
+            background: #2c2c4a;
+            margin: 0 auto;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+        }
+        .links-container {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin: 0.5rem 0 1rem 0;
+        }
+        .video-link {
+            color: #1a73e8;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .video-link:hover {
+            border-bottom-color: #1a73e8;
+        }
+
+        /* ========== MATCHING CON FLECHAS (DRAG & CLICK) ========== */
+        .match-container {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            gap: 3rem;
+            padding: 1rem 0;
+        }
+        .match-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .match-item {
+            padding: 0.6rem 1rem;
+            background: #f0f8ff;
+            border: 2px solid #b3d9ff;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.2s;
+            user-select: none;
+            position: relative;
+            z-index: 2;
+        }
+        .match-item:hover {
+            background: #d4e8ff;
+            border-color: #1a73e8;
+        }
+        .match-item.active {
+            background: #1a73e8;
+            color: white;
+            border-color: #1a73e8;
+            box-shadow: 0 0 15px rgba(26,115,232,0.4);
+        }
+        .match-item.correct {
+            background: #d4edda;
+            border-color: #2d7d46;
+            color: #0d6b3e;
+            cursor: default;
+            opacity: 0.7;
+        }
+        .match-item.wrong-flash {
+            background: #f8d7da;
+            border-color: #c0392b;
+            color: #721c24;
+        }
+        .match-item.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        .match-item .match-label {
+            font-size: 0.8rem;
+            color: #888;
+            display: block;
+            margin-top: 0.2rem;
+        }
+        .match-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .match-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0 0.5rem;
+            font-weight: 600;
+        }
+        .match-stats .score {
+            color: #1a73e8;
+            font-size: 1.2rem;
+        }
+        .match-stats .reset-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 0.3rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .match-stats .reset-btn:hover {
+            background: #0d47a1;
+        }
+        .match-feedback {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #2d7d46;
+            margin-top: 0.5rem;
+            min-height: 1.5rem;
+        }
+        .match-col .match-item:first-child {
+            margin-top: 0;
+        }
+
+        /* Вопросы */
+        .question-block {
+            background: #ffffff;
+            padding: 1.2rem 1.5rem;
+            border-radius: 14px;
+            margin: 1rem 0;
+            border-left: 5px solid #f39c12;
+        }
+        .question-block p {
+            margin: 0.8rem 0;
+        }
+        .question-block .q {
+            font-weight: 600;
+            color: #0a2a3b;
+        }
+        .audio-instruction {
+            background: #d4edda;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #1a73e8;
+            margin: 1.5rem 0 0.5rem 0;
+            font-weight: 500;
+            color: #0a2a3b;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            .task { padding: 1.2rem; }
+            h1 { font-size: 1.8rem; }
+            .match-container { flex-direction: column; gap: 1.5rem; }
+            .links-container { flex-direction: column; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<h1>📖 El mejor regalo</h1>
+
+<!-- ==================== ЗАДАНИЕ 1: VOCABULARIO ==================== -->
+<div class="task" id="task1">
+    <h2><span>1</span> Vocabulario – antes de ver</h2>
+    <p><strong>Relaciona cada palabra con su traducción.</strong></p>
+    <div class="exercise-block">
+        <div class="match-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem 2rem; align-items:center;">
+            <div class="input-group"><label>ofrecer</label> <select id="q1_1"><option value="">---</option><option value="предлагать">предлагать</option><option value="длиться">длиться</option><option value="летать">летать</option><option value="поощрять">поощрять</option><option value="отдаляться">отдаляться</option><option value="лист">лист</option><option value="крылья">крылья</option><option value="сталкиваться">сталкиваться</option><option value="препятствия">препятствия</option></select><span class="result-icon"></span><span class="correct-answer"></span></div>
+            <div class="input-group"><label>durar</label> <select id="q1_2"><option value="">---</option><option value="предлагать">предлагать</option><option value="длиться">длиться</option><option value="летать">летать</option><option value="поощрять">поощрять</option><option value="отдаляться">отдаляться</option><option value="лист">лист</option><option value="крылья">крылья</option><option value="сталкиваться">сталкиваться</option><option value="препятствия">препятствия</option></select><span class="result-icon"></span><span class="correct-answer"></span></div>
+            <div class="input-group"><label>volar</label> <select id="q1_3"><option value="">---</option><option value="предлагать">предлагать</option><option value="длиться">длиться</option><option value="летать">летать</option><option value="поощрять">поощрять</option><option value="отдаляться">отдаляться</option><option value="лист">лист</option><option value="крылья">крылья</option><option value="сталкиваться">сталкиваться</option><option value="препятствия">препятствия</option></select><span class="result-icon"></span><span class="correct-answer"></span></div>
+            <div class="input-group"><label>fomentar</label> <select id="q1_4"><option value="">---</option><option value="предлагать">предлагать</option><option value="длиться">длиться</option><option value="летать">летать</option><option value="поощрять">поощрять</option><option value="отдаляться">отдаляться</option><option value="лист">лист</option><option value="крылья">крылья</option><option value="сталкиваться">сталкиваться</option><option value="препятствия">препятствия</option></select><span class="result-icon"></span><span class="correct-answer"></span></div>
+            <div class="input-group"><label>alejarse</label> <select id="q1_5"><option value="">---</option><option value="предлагать">предлагать</option><option value="длиться">длиться</option><option value="летать">летать</option><option value="поощрять">поощрять</option><option value="отдаляться">отдаляться</option><option value="лист">лист</option><option value="крылья">крылья</option><option value="сталкиваться">сталкиваться</option><option value="препятствия">препятствия</option></select><span class="result-icon"></span><span class="correct-answer"></span></div>
+            <div class="input-group"><label>hoja</label> <select id="q1_6"><option value="">---</option><option value="предлагать">предлагать</option><option value="длиться">длиться</option><option value="летать">летать</option><option value="поощрять">поощрять</option><option value="отдаляться">отдаляться</option><option value="лист">лист</option><option value="крылья">крылья</option><option value="сталкиваться">сталкиваться</option><option value="препятствия">препятствия</option></select><span class="result-icon"></span><span class="correct-answer"></span></div>
+            <div class="input-group"><label>alas</label> <select id="q1_7"><option value="">---</option><option value="предлагать">предлагать</option><option value="длиться">длиться</option><option value="летать">летать</option><option value="поощрять">поощрять</option><option value="отдаляться">отдаляться</option><option value="лист">лист</option><option value="крылья">крылья</option><option value="сталкиваться">сталкиваться</option><option value="препятствия">препятствия</option></select><span class="result-icon"></span><span class="correct-answer"></span></div>
+            <div class="input-group"><label>enfrentarse</label> <select id="q1_8"><option value="">---</option><option value="предлагать">предлагать</option><option value="длиться">длиться</option><option value="летать">летать</option><option value="поощрять">поощрять</option><option value="отдаляться">отдаляться</option><option value="лист">лист</option><option value="крылья">крылья</option><option value="сталкиваться">сталкиваться</option><option value="препятствия">препятствия</option></select><span class="result-icon"></span><span class="correct-answer"></span></div>
+            <div class="input-group"><label>obstáculos</label> <select id="q1_9"><option value="">---</option><option value="предлагать">предлагать</option><option value="длиться">длиться</option><option value="летать">летать</option><option value="поощрять">поощрять</option><option value="отдаляться">отдаляться</option><option value="лист">лист</option><option value="крылья">крылья</option><option value="сталкиваться">сталкиваться</option><option value="препятствия">препятствия</option></select><span class="result-icon"></span><span class="correct-answer"></span></div>
+        </div>
+    </div>
+    <button class="check-btn" onclick="checkSelectTask('task1', ['предлагать','длиться','летать','поощрять','отдаляться','лист','крылья','сталкиваться','препятствия'])">Проверить</button>
+</div>
+
+<!-- ==================== ЗАДАНИЕ 2: CONECTA CON FLECHAS ==================== -->
+<div class="task" id="task2">
+    <h2><span>2</span> Conecta con flechas</h2>
+    <p><strong>Haz clic en un elemento de la izquierda y luego en su pareja de la derecha. Si es correcto, se dibujará una flecha verde.</strong></p>
+    <div class="exercise-block" style="border-left-color: #f39c12;">
+        <div id="matchContainer" class="match-container">
+            <div id="leftCol" class="match-col">
+                <div class="match-item" data-index="0">volar</div>
+                <div class="match-item" data-index="1">nos hace</div>
+                <div class="match-item" data-index="2">disfrutar de</div>
+                <div class="match-item" data-index="3">enfrentarnos a</div>
+                <div class="match-item" data-index="4">fomenta</div>
+                <div class="match-item" data-index="5">alejarnos de</div>
+                <div class="match-item" data-index="6">Nos dan alas para</div>
+            </div>
+            <div id="rightCol" class="match-col"></div>
+            <canvas id="matchCanvas" class="match-canvas"></canvas>
+        </div>
+        <div class="match-stats">
+            <span class="score">✅ <span id="matchScore">0</span> / 7</span>
+            <button class="reset-btn" id="resetMatch">Reiniciar</button>
+        </div>
+        <div id="matchFeedback" class="match-feedback"></div>
+    </div>
+</div>
+
+<!-- ==================== ЗАДАНИЕ 3: ВИДЕО ==================== -->
+<div class="task" id="task3">
+    <h2><span>3</span> Video – comprensión</h2>
+    <p><strong>Mira el vídeo y elige la opción correcta.</strong></p>
+    <div class="tv-container">
+        <div class="tv-screen">
+            <iframe src="https://drive.google.com/file/d/16b4T6g2LeIvHTE4BXfHtSap-Lzt1XwVh/preview" allowfullscreen></iframe>
+        </div>
+        <div class="tv-stand"></div>
+    </div>
+    <div class="links-container">
+        <a class="video-link" href="https://drive.google.com/file/d/16b4T6g2LeIvHTE4BXfHtSap-Lzt1XwVh/view" target="_blank">🔗 Abrir en Google Drive</a>
+        <a class="video-link" href="https://www.youtube.com/watch?v=nXC23eNks1M" target="_blank">🔗 Abrir en YouTube</a>
+    </div>
+    <div class="exercise-block">
+        <div class="input-group"><label>1. ¿Qué dice el vídeo que es el mejor regalo siempre?</label>
+            <select id="q3_1"><option value="">---</option><option value="un libro">un libro</option><option value="una flor">una flor</option><option value="un viaje">un viaje</option></select>
+            <span class="result-icon"></span><span class="correct-answer"></span>
+        </div>
+        <div class="input-group"><label>2. ¿Por qué es un buen regalo según el vídeo?</label>
+            <select id="q3_2"><option value="">---</option><option value="porque es barato">porque es barato</option><option value="porque dura toda la vida">porque dura toda la vida</option><option value="porque es ligero">porque es ligero</option></select>
+            <span class="result-icon"></span><span class="correct-answer"></span>
+        </div>
+        <div class="input-group"><label>3. ¿Qué ayuda a hacer el libro?</label>
+            <select id="q3_3"><option value="">---</option><option value="olvidar los problemas">olvidar los problemas</option><option value="volar la imaginación y fomentar la creatividad">volar la imaginación y fomentar la creatividad</option><option value="dormir mejor">dormir mejor</option></select>
+            <span class="result-icon"></span><span class="correct-answer"></span>
+        </div>
+        <div class="input-group"><label>4. ¿De qué nos alejan los libros?</label>
+            <select id="q3_4"><option value="">---</option><option value="de la familia">de la familia</option><option value="de la pantalla">de la pantalla</option><option value="del trabajo">del trabajo</option></select>
+            <span class="result-icon"></span><span class="correct-answer"></span>
+        </div>
+        <div class="input-group"><label>5. Según el vídeo, ¿qué es un "regalo estrella"?</label>
+            <select id="q3_5"><option value="">---</option><option value="un libro">un libro</option><option value="un dispositivo electrónico">un dispositivo electrónico</option><option value="una experiencia">una experiencia</option></select>
+            <span class="result-icon"></span><span class="correct-answer"></span>
+        </div>
+    </div>
+    <button class="check-btn" onclick="checkSelectTask('task3', ['un libro','porque dura toda la vida','volar la imaginación y fomentar la creatividad','de la pantalla','un libro'])">Проверить</button>
+</div>
+
+<!-- ==================== ЗАДАНИЕ 4: PREGUNTAS PROVOCATIVAS ==================== -->
+<div class="task" id="task4">
+    <h2><span>4</span> 🎤 Preguntas provocativas</h2>
+    <p><strong>Elige una de las siguientes preguntas y graba un audio de 1–2 minutos respondiendo. Envía el audio a tu profesora.</strong></p>
+    <div class="question-block">
+        <p class="q">🔥 1. ¿Crees que regalar un libro es de tacaños? ¿Por qué?</p>
+        <p class="q">🔥 2. Si alguien te regala un libro, ¿significa que no te conoce y no sabe qué regalarte?</p>
+        <p class="q">🔥 3. ¿Es mejor regalar algo caro que un libro? Argumenta.</p>
+    </div>
+    <p style="margin-top: 0.5rem; font-weight: 500; color: #0a2a3b;">🎙️ Graba tu respuesta y envía el audio a tu profesora.</p>
+</div>
+
+<hr>
+<p style="text-align:center; color:#1a73e8; font-size:0.9rem;">✅ Todas las respuestas con autoverificación están listas. ¡Buena suerte!</p>
+
+<script>
+    // =================== ЗАДАНИЕ 1 И 3: SELECT CHECK ===================
+    function checkSelectTask(taskId, expectedAnswers) {
+        const task = document.getElementById(taskId);
+        const selects = task.querySelectorAll('select');
+        selects.forEach((select, index) => {
+            const userAnswer = select.value;
+            const correct = expectedAnswers[index] || '';
+            const icon = select.parentElement.querySelector('.result-icon');
+            const hint = select.parentElement.querySelector('.correct-answer');
+            select.classList.remove('correct-input', 'wrong-input');
+            if (userAnswer === correct) {
+                select.classList.add('correct-input');
+                icon.textContent = '✅';
+                hint.classList.remove('show');
+            } else {
+                select.classList.add('wrong-input');
+                icon.textContent = '❌';
+                hint.textContent = '→ ' + correct;
+                hint.classList.add('show');
+            }
+        });
+    }
+
+    // =================== ЗАДАНИЕ 2: MATCH CON FLECHAS ===================
+    (function() {
+        const pairs = [
+            { left: 'volar', right: 'la imaginación' },
+            { left: 'nos hace', right: 'sentir' },
+            { left: 'disfrutar de', right: 'sus hojas y de su aroma' },
+            { left: 'enfrentarnos a', right: 'los obstáculos de la vida' },
+            { left: 'fomenta', right: 'la creatividad' },
+            { left: 'alejarnos de', right: 'la pantalla' },
+            { left: 'Nos dan alas para', right: 'enfrentarnos' }
+        ];
+
+        let leftItems = [];
+        let rightItems = [];
+        let selectedLeft = null;
+        let matchedPairs = 0;
+        let isProcessing = false;
+
+        const container = document.getElementById('matchContainer');
+        const leftCol = document.getElementById('leftCol');
+        const rightCol = document.getElementById('rightCol');
+        const canvas = document.getElementById('matchCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreSpan = document.getElementById('matchScore');
+        const feedback = document.getElementById('matchFeedback');
+        const resetBtn = document.getElementById('resetMatch');
+
+        function shuffle(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function initRightCol() {
+            const rightTexts = pairs.map(p => p.right);
+            const shuffled = shuffle([...rightTexts]);
+            rightCol.innerHTML = '';
+            shuffled.forEach((text, index) => {
+                const div = document.createElement('div');
+                div.className = 'match-item';
+                div.dataset.index = index;
+                div.textContent = text;
+                rightCol.appendChild(div);
+            });
+            rightItems = Array.from(rightCol.children);
+            rightItems.forEach(el => {
+                const text = el.textContent;
+                const pair = pairs.find(p => p.right === text);
+                el.dataset.pairIndex = pairs.indexOf(pair);
+            });
+            leftItems = Array.from(leftCol.children);
+            leftItems.forEach(el => {
+                const text = el.textContent;
+                const pair = pairs.find(p => p.left === text);
+                el.dataset.pairIndex = pairs.indexOf(pair);
+            });
+        }
+
+        function resetMatch() {
+            leftItems.forEach(el => {
+                el.classList.remove('active', 'correct', 'wrong-flash', 'disabled');
+            });
+            rightItems.forEach(el => {
+                el.classList.remove('active', 'correct', 'wrong-flash', 'disabled');
+            });
+            selectedLeft = null;
+            matchedPairs = 0;
+            scoreSpan.textContent = '0';
+            feedback.textContent = '';
+            initRightCol();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            rightItems = Array.from(rightCol.children);
+            attachEvents();
+            resizeCanvas();
+        }
+
+        function attachEvents() {
+            leftItems.forEach(el => {
+                el.removeEventListener('click', onLeftClick);
+                el.addEventListener('click', onLeftClick);
+            });
+            rightItems.forEach(el => {
+                el.removeEventListener('click', onRightClick);
+                el.addEventListener('click', onRightClick);
+            });
+        }
+
+        function onLeftClick(e) {
+            if (isProcessing) return;
+            const el = e.currentTarget;
+            if (el.classList.contains('correct') || el.classList.contains('disabled')) return;
+            leftItems.forEach(item => item.classList.remove('active'));
+            el.classList.add('active');
+            selectedLeft = el;
+            feedback.textContent = '';
+        }
+
+        function onRightClick(e) {
+            if (isProcessing) return;
+            const rightEl = e.currentTarget;
+            if (rightEl.classList.contains('correct') || rightEl.classList.contains('disabled')) return;
+            if (!selectedLeft) {
+                feedback.textContent = '❌ Primero selecciona un elemento de la izquierda.';
+                return;
+            }
+            const leftIndex = parseInt(selectedLeft.dataset.pairIndex);
+            const rightIndex = parseInt(rightEl.dataset.pairIndex);
+            if (leftIndex === rightIndex) {
+                matchedPairs++;
+                scoreSpan.textContent = matchedPairs;
+                selectedLeft.classList.remove('active');
+                selectedLeft.classList.add('correct', 'disabled');
+                rightEl.classList.add('correct', 'disabled');
+                drawLine(selectedLeft, rightEl, '#2d7d46');
+                feedback.textContent = '✅ ¡Correcto!';
+                selectedLeft = null;
+                if (matchedPairs === pairs.length) {
+                    feedback.textContent = '🎉 ¡Has conectado todas las expresiones!';
+                }
+            } else {
+                isProcessing = true;
+                selectedLeft.classList.remove('active');
+                selectedLeft.classList.add('wrong-flash');
+                rightEl.classList.add('wrong-flash');
+                drawLine(selectedLeft, rightEl, '#c0392b');
+                feedback.textContent = '❌ Incorrecto, intenta de nuevo.';
+                setTimeout(() => {
+                    selectedLeft.classList.remove('wrong-flash');
+                    rightEl.classList.remove('wrong-flash');
+                    redrawCorrectLines();
+                    isProcessing = false;
+                    selectedLeft = null;
+                }, 700);
+            }
+        }
+
+        function drawLine(el1, el2, color) {
+            const rect1 = el1.getBoundingClientRect();
+            const rect2 = el2.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            const x1 = rect1.right - containerRect.left;
+            const y1 = rect1.top + rect1.height/2 - containerRect.top;
+            const x2 = rect2.left - containerRect.left;
+            const y2 = rect2.top + rect2.height/2 - containerRect.top;
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            const angle = Math.atan2(y2 - y1, x2 - x1);
+            const arrowLen = 12;
+            const arrowAngle = 0.5;
+            const xArrow = x2 - 5;
+            const yArrow = y2 - 5;
+            ctx.beginPath();
+            ctx.moveTo(xArrow, yArrow);
+            ctx.lineTo(xArrow - arrowLen * Math.cos(angle - arrowAngle), yArrow - arrowLen * Math.sin(angle - arrowAngle));
+            ctx.moveTo(xArrow, yArrow);
+            ctx.lineTo(xArrow - arrowLen * Math.cos(angle + arrowAngle), yArrow - arrowLen * Math.sin(angle + arrowAngle));
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        }
+
+        function redrawCorrectLines() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const leftCorrect = leftItems.filter(el => el.classList.contains('correct'));
+            const rightCorrect = rightItems.filter(el => el.classList.contains('correct'));
+            leftCorrect.forEach(leftEl => {
+                const pairIdx = parseInt(leftEl.dataset.pairIndex);
+                const rightEl = rightCorrect.find(el => parseInt(el.dataset.pairIndex) === pairIdx);
+                if (rightEl) {
+                    drawLine(leftEl, rightEl, '#2d7d46');
+                }
+            });
+        }
+
+        function resizeCanvas() {
+            const rect = container.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = rect.height + 'px';
+            redrawCorrectLines();
+        }
+
+        function init() {
+            initRightCol();
+            leftItems = Array.from(leftCol.children);
+            rightItems = Array.from(rightCol.children);
+            attachEvents();
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+        }
+
+        resetBtn.addEventListener('click', resetMatch);
+
+        const originalReset = resetMatch;
+        resetMatch = function() {
+            originalReset();
+            leftItems = Array.from(leftCol.children);
+            rightItems = Array.from(rightCol.children);
+            attachEvents();
+            resizeCanvas();
+        };
+
+        init();
+    })();
+</script>
+
+</body>
+</html>
