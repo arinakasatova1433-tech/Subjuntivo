@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Gran Repaso del Subjuntivo: Teoría y Práctica</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap');
+
+        :root {
+            --bg-color: #f7fcf8;
+            --green-light: #e8f5e9;
+            --green-main: #81c784;
+            --green-dark: #2e7d32;
+            --pink-light: #fce4ec;
+            --pink-main: #f06292;
+            --pink-dark: #ad1457;
+            --text-main: #333333;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 30px 15px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            background: linear-gradient(135deg, var(--green-light), var(--pink-light));
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(129, 199, 132, 0.2);
+            border: 2px solid white;
+        }
+
+        header h1 {
+            color: var(--pink-dark);
+            margin: 0 0 10px 0;
+            font-size: 2.2rem;
+            font-weight: 900;
+        }
+
+        header p {
+            color: var(--green-dark);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .theory-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 8px solid var(--green-main);
+        }
+
+        .theory-card.pink-theme {
+            border-left-color: var(--pink-main);
+        }
+
+        h2 {
+            color: var(--green-dark);
+            font-size: 1.6rem;
+            margin-top: 0;
+            border-bottom: 2px dashed var(--green-light);
+            padding-bottom: 10px;
+        }
+
+        .pink-theme h2 {
+            color: var(--pink-dark);
+            border-bottom-color: var(--pink-light);
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: #444;
+            margin-top: 25px;
+            background-color: var(--green-light);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .pink-theme h3 {
+            background-color: var(--pink-light);
+        }
+
+        .rule-box {
+            background-color: #fafafa;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+        }
+
+        .rule-box p {
+            margin-top: 0;
+        }
+
+        /* Стили для списков слов */
+        .word-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .word-tag {
+            background-color: var(--green-light);
+            color: var(--green-dark);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .pink-theme .word-tag {
+            background-color: var(--pink-light);
+            color: var(--pink-dark);
+        }
+
+        .exception-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+
+        .exercise-block {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            border: 1px solid #f0f0f0;
+            border-top: 5px solid var(--green-main);
+        }
+
+        .exercise-block.pink-border {
+            border-top-color: var(--pink-main);
+        }
+
+        .exercise-list {
+            padding-left: 20px;
+        }
+
+        .exercise-list li {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .blank {
+            display: inline-block;
+            border-bottom: 2px dashed var(--pink-main);
+            min-width: 90px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--green-dark);
+            margin: 0 5px;
+        }
+
+        .btn-reveal {
+            background-color: var(--green-main);
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: inherit;
+            font-weight: 700;
+            margin-left: 10px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-reveal:hover {
+            background-color: var(--green-dark);
+            transform: scale(1.05);
+        }
+
+        .pink-border .btn-reveal {
+            background-color: var(--pink-main);
+        }
+
+        .pink-border .btn-reveal:hover {
+            background-color: var(--pink-dark);
+        }
+
+        .answer {
+            display: none;
+            margin-top: 8px;
+            padding: 10px 15px;
+            background-color: var(--green-light);
+            border-radius: 8px;
+            color: var(--green-dark);
+            font-size: 0.95rem;
+            border-left: 4px solid var(--green-main);
+        }
+
+        .pink-border .answer {
+            background-color: var(--pink-light);
+            color: var(--pink-dark);
+            border-left-color: var(--pink-main);
+        }
+
+        .answer.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .highlight {
+            background-color: #fff9c4;
+            padding: 0 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🌸 El Gran Repaso del Subjuntivo 🍀</h1>
+        <p>Teoría completa + Práctica (Presente vs. Imperfecto)</p>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN 1: DE COMPLEMENTO -->
+    <!-- ========================================== -->
+    <div class="theory-card">
+        <h2>Oraciones de Complemento (Дополнительные)</h2>
+        <p>В придаточных дополнительных (вводимых союзом <em>que</em>) используется Субхунтив, если главный глагол выражает:</p>
+        
+        <h3>1. Волеизъявление (Voluntad)</h3>
+        <div class="word-group">
+            <span class="word-tag">mandar (приказывать)</span>
+            <span class="word-tag">ordenar (приказывать)</span>
+            <span class="word-tag">exigir (требовать)</span>
+            <span class="word-tag">proponer (предлагать)</span>
+            <span class="word-tag">aconsejar (советовать)</span>
+            <span class="word-tag">recomendar (рекомендовать)</span>
+            <span class="word-tag">insistir en (настаивать)</span>
+            <span class="word-tag">pedir (просить)</span>
+            <span class="word-tag">necesitar (нуждаться)</span>
+            <span class="word-tag">rogar (умолять)</span>
+            <span class="word-tag">desear (желать)</span>
+            <span class="word-tag">querer (хотеть)</span>
+            <span class="word-tag">soñar con (мечтать)</span>
+            <span class="word-tag">permitir (разрешать)</span>
+            <span class="word-tag">prohibir (запрещать)</span>
+        </div>
+        <p style="font-size: 0.9rem; margin-top: 10px;"><em>*В отрицательной форме эти глаголы тоже требуют Субхунтив (No insisto en que...).</em></p>
+        <p><strong>Глаголы речи (decir, escribir, gritar, repetir, advertir) + que</strong> также требуют Субхунтив в значении «чтобы».</p>
+
+        <h3>2. Чувства и эмоции (Emociones)</h3>
+        <div class="word-group">
+            <span class="word-tag">alegrarse de (радоваться)</span>
+            <span class="word-tag">afligirse de (огорчаться)</span>
+            <span class="word-tag">sentir / lamentar (сожалеть)</span>
+            <span class="word-tag">tener lástima de (жалеть)</span>
+            <span class="word-tag">asombrarse de (удивляться)</span>
+            <span class="word-tag">extrañarse de (удивляться)</span>
+            <span class="word-tag">sorprenderse de (удивляться)</span>
+            <span class="word-tag">temer / tener miedo de (бояться)</span>
+            <span class="word-tag">asustarse de (пугаться)</span>
+            <span class="word-tag">indignarse de (возмущаться)</span>
+            <span class="word-tag">enfadarse de (злиться)</span>
+            <span class="word-tag">preocuparse de (беспокоиться)</span>
+            <span class="word-tag">soportar / aguantar (терпеть)</span>
+            <span class="word-tag">odiar (ненавидеть)</span>
+            <span class="word-tag">estar contento/descontento de (быть довольным/недовольным)</span>
+        </div>
+        <p style="font-size: 0.9rem; margin-top: 10px;"><em>*В отрицательной форме — тоже Субхунтив.</em></p>
+
+        <h3>3. Сомнение (Duda)</h3>
+        <div class="word-group">
+            <span class="word-tag">dudar (сомневаться)</span>
+            <span class="word-tag">no creer (не верить)</span>
+            <span class="word-tag">no pensar (не думать)</span>
+            <span class="word-tag">no estar seguro de (не быть уверенным)</span>
+            <span class="word-tag">no imaginarse (не представлять)</span>
+        </div>
+
+        <div class="exception-box">
+            <strong>⚠️ Исключения (Indicativo):</strong> Глаголы <em>creer, pensar, imaginarse, estar seguro de</em> в утвердительной форме, а также <em>dudar</em> в отрицательной (no dudo que...) выражают уверенность и требуют <strong>Indicativo</strong>.<br>
+            <em>Пример:</em> Creo que <strong>viene</strong>. / No dudo que <strong>viene</strong>.
+        </div>
+
+        <div class="exception-box" style="background-color: var(--pink-light); border-color: var(--pink-main); color: var(--pink-dark);">
+            <strong>💡 Правило подлежащих:</strong> Если подлежащее главного и придаточного предложения совпадает, вместо Субхунтива используется <strong>Инфинитив</strong>.<br>
+            <em>Сравни:</em> Me alegro de que tú <strong>tomes</strong> parte. / Me alegro de <strong>tomar</strong> parte.
+        </div>
+    </div>
+
+    <!-- Упражнения De Complemento -->
+    <div class="exercise-block">
+        <h3>Práctica 1: De Complemento</h3>
+        <ol class="exercise-list">
+            <li>Espero que hoy tú <span class="blank">______</span> (llegar) a tiempo a clase.
+                <button class="btn-reveal" onclick="reveal('d1')">Ver</button><span class="answer" id="d1">llegues (Presente)</span>
+            </li>
+            <li>Ayer el profesor nos pidió que <span class="blank">______</span> (hacer) un trabajo en equipo.
+                <button class="btn-reveal" onclick="reveal('d2')">Ver</button><span class="answer" id="d2">hiciéramos (Imperfecto)</span>
+            </li>
+            <li>Me molesta mucho que la gente <span class="blank">______</span> (quejarse) tanto.
+                <button class="btn-reveal" onclick="reveal('d3')">Ver</button><span class="answer" id="d3">se queje (Presente)</span>
+            </li>
+            <li>No creía que tú <span class="blank">______</span> (tener) tanto talento.
+                <button class="btn-reveal" onclick="reveal('d4')">Ver</button><span class="answer" id="d4">tuvieras (Imperfecto)</span>
+            </li>
+            <li><strong>Trampa:</strong> Creo que ella <span class="blank">______</span> (estar) en casa.
+                <button class="btn-reveal" onclick="reveal('d5')">Ver</button><span class="answer" id="d5">está (Indicativo - уверенность)</span>
+            </li>
+        </ol>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN 2: DE SUJETO -->
+    <!-- ========================================== -->
+    <div class="theory-card pink-theme">
+        <h2>Oraciones de Sujeto (Подлежащные)</h2>
+        <p>Используются с безличными выражениями. Субхунтив нужен, если выражение передает:</p>
+
+        <h3>1. Волеизъявление (Voluntad)</h3>
+        <div class="word-group">
+            <span class="word-tag">es necesario que (необходимо, чтобы)</span>
+            <span class="word-tag">es preciso que (нужно, чтобы)</span>
+            <span class="word-tag">hace falta que (требуется, чтобы)</span>
+            <span class="word-tag">es deseable que (желательно, чтобы)</span>
+            <span class="word-tag">es preferible que (предпочтительно, чтобы)</span>
+        </div>
+        <p style="font-size: 0.9rem; margin-top: 10px;"><em>*В отрицательной форме — тоже Субхунтив (No es necesario que...).</em></p>
+
+        <h3>2. Вероятность, сомнение (Inseguridad, duda)</h3>
+        <div class="word-group">
+            <span class="word-tag">es posible que (возможно, что)</span>
+            <span class="word-tag">es imposible que (невозможно, чтобы)</span>
+            <span class="word-tag">es probable que (вероятно, что)</span>
+            <span class="word-tag">es dudoso que (сомнительно, чтобы)</span>
+            <span class="word-tag">parece mentira que (кажется невероятным, что)</span>
+            <span class="word-tag">no es evidente que (не очевидно, что)</span>
+            <span class="word-tag">no es verdad que (неправда, что)</span>
+            <span class="word-tag">no es cierto que (неверно, что)</span>
+            <span class="word-tag">no es exacto que (неточно, что)</span>
+            <span class="word-tag">no significa que (не значит, что)</span>
+            <span class="word-tag">no parece que (не похоже, чтобы)</span>
+            <span class="word-tag">no es que (не то чтобы)</span>
+        </div>
+        <div class="exception-box">
+            <strong>⚠️ Исключения (Indicativo):</strong> <em>es evidente que</em> (очевидно, что), <em>es verdad que</em> (правда, что), <em>es cierto que</em> (верно, что), <em>es exacto que</em> (точно, что), <em>significa que</em> (значит, что), <em>parece que</em> (кажется, что), <em>es que</em> (дело в том, что) — передают уверенность.
+        </div>
+
+        <h3>3. Эмоции (Emociones)</h3>
+        <div class="word-group">
+            <span class="word-tag">es (una) lástima que (жаль, что)</span>
+            <span class="word-tag">es una pena que (обидно/жаль, что)</span>
+            <span class="word-tag">es ridículo que (смешно/нелепо, что)</span>
+            <span class="word-tag">es sorprendente que (удивительно, что)</span>
+            <span class="word-tag">es extraño que (странно, что)</span>
+            <span class="word-tag">es agradable que (приятно, что)</span>
+            <span class="word-tag">es desagradable que (неприятно, что)</span>
+            <span class="word-tag">es insoportable que (невыносимо, что)</span>
+        </div>
+        <p style="font-size: 0.9rem; margin-top: 10px;"><em>*В отрицательной форме — тоже Субхунтив.</em></p>
+
+        <h3>4. Оценка информации (Valoración)</h3>
+        <div class="word-group">
+            <span class="word-tag">es lógico que (логично, что)</span>
+            <span class="word-tag">es natural que (естественно, что)</span>
+            <span class="word-tag">es importante que (важно, чтобы)</span>
+            <span class="word-tag">está bien/mal que (хорошо/плохо, что)</span>
+            <span class="word-tag">es bueno/malo que (хорошо/плохо, что)</span>
+            <span class="word-tag">es mejor/peor que (лучше/хуже, чтобы)</span>
+            <span class="word-tag">es curioso que (любопытно, что)</span>
+        </div>
+        <p style="font-size: 0.9rem; margin-top: 10px;"><em>*В отрицательной форме — тоже Субхунтив.</em></p>
+
+        <h3>5. Непереходные глаголы в 3-м лице (Me/te/le...)</h3>
+        <div class="word-group">
+            <span class="word-tag">(no) alegra que ((не) радует, что)</span>
+            <span class="word-tag">sorprende que (удивляет, что)</span>
+            <span class="word-tag">agrada que (нравится/приятно, что)</span>
+            <span class="word-tag">gusta que (нравится, что)</span>
+            <span class="word-tag">asusta que (пугает, что)</span>
+            <span class="word-tag">indigna que (возмущает, что)</span>
+            <span class="word-tag">enfada que (злит, что)</span>
+            <span class="word-tag">preocupa que (беспокоит, что)</span>
+            <span class="word-tag">encanta que (восхищает/очень нравится, что)</span>
+            <span class="word-tag">molesta que (раздражает, что)</span>
+            <span class="word-tag">da pena / da miedo / da risa que (жаль / страшно / смешно, что)</span>
+        </div>
+    </div>
+
+    <!-- Упражнения De Sujeto -->
+    <div class="exercise-block pink-border">
+        <h3>Práctica 2: De Sujeto</h3>
+        <ol class="exercise-list">
+            <li>Es necesario que nosotros <span class="blank">______</span> (reciclar) más basura.
+                <button class="btn-reveal" onclick="reveal('s1')">Ver</button><span class="answer" id="s1">reciclemos (Presente)</span>
+            </li>
+            <li>Era importante que los estudiantes <span class="blank">______</span> (entregar) el proyecto a tiempo.
+                <button class="btn-reveal" onclick="reveal('s2')">Ver</button><span class="answer" id="s2">entregaran (Imperfecto)</span>
+            </li>
+            <li>Me sorprende que tú no <span class="blank">______</span> (saber) la noticia.
+                <button class="btn-reveal" onclick="reveal('s3')">Ver</button><span class="answer" id="s3">sepas (Presente)</span>
+            </li>
+            <li><strong>Trampa:</strong> Es evidente que ella <span class="blank">______</span> (querer) a sus animales.
+                <button class="btn-reveal" onclick="reveal('s4')">Ver</button><span class="answer" id="s4">quiere (Indicativo - es evidente que)</span>
+            </li>
+            <li><strong>Trampa:</strong> No es verdad que ellos <span class="blank">______</span> (ser) biólogos.
+                <button class="btn-reveal" onclick="reveal('s5')">Ver</button><span class="answer" id="s5">sean (Subjuntivo - no es verdad que)</span>
+            </li>
+        </ol>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN 3: DE TIEMPO -->
+    <!-- ========================================== -->
+    <div class="theory-card">
+        <h2>Oraciones de Tiempo (Времени) 🌟</h2>
+        <p><strong>Союзы:</strong> <em>cuando, hasta que, después de que, en cuanto, apenas, mientras que, antes de que</em>.</p>
+        
+        <div class="rule-box">
+            <ul>
+                <li><strong>Indicativo:</strong> Если действие относится к настоящему или прошлому (<em>Cuando tengo tiempo...</em> / <em>Cuando terminó...</em>).</li>
+                <li><strong>Subjuntivo:</strong> Если действие относится к будущему (<em>Cuando esté en Madrid...</em>).</li>
+                <li><strong>Исключение:</strong> Союз <em>antes de que</em> (до того как) <strong>ВСЕГДА</strong> требует Субхунтив (Presente или Imperfecto).</li>
+            </ul>
+        </div>
+        <div class="exception-box">
+            <strong>💡 Различайте:</strong> союз <em>cuando</em> (когда - время) и вопросительное слово <em>cuándo</em> (когда? - вопрос).<br>
+            <em>No sé cuándo empezará</em> (вопрос) vs <em>La sala estará llena cuando empiece</em> (время).
+        </div>
+    </div>
+
+    <div class="exercise-block">
+        <h3>Práctica 3: De Tiempo</h3>
+        <ol class="exercise-list">
+            <li>Cuando <span class="blank">______</span> (terminar) la carrera, buscaré trabajo.
+                <button class="btn-reveal" onclick="reveal('t1')">Ver</button><span class="answer" id="t1">termine (Futuro ➔ Subjuntivo)</span>
+            </li>
+            <li>Ayer, cuando <span class="blank">______</span> (llegar) a casa, me puse a estudiar.
+                <button class="btn-reveal" onclick="reveal('t2')">Ver</button><span class="answer" id="t2">llegué (Pasado ➔ Indicativo)</span>
+            </li>
+            <li>Mi madre me llamó antes de que yo <span class="blank">______</span> (salir) de casa.
+                <button class="btn-reveal" onclick="reveal('t3')">Ver</button><span class="answer" id="t3">saliera (Antes de que + Pasado ➔ Imperfecto Subj.)</span>
+            </li>
+            <li>Espera aquí hasta que el doctor te <span class="blank">______</span> (llamar).
+                <button class="btn-reveal" onclick="reveal('t4')">Ver</button><span class="answer" id="t4">llame (Futuro ➔ Subjuntivo)</span>
+            </li>
+        </ol>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN 4: DE FIN -->
+    <!-- ========================================== -->
+    <div class="theory-card pink-theme">
+        <h2>Oraciones de Fin (Цели) 🌟</h2>
+        <p><strong>Союзы:</strong> <em>para que, a fin de que</em> (для того чтобы).</p>
+        
+        <div class="rule-box">
+            <strong>Правило:</strong> Используем Субхунтив, если подлежащее в главной и придаточной части <strong>РАЗНЫЕ</strong>.<br>
+            Если подлежащее одно — используем <em>para + Infinitivo</em>.
+        </div>
+        <div class="exception-box" style="background-color: var(--pink-light); border-color: var(--pink-main); color: var(--pink-dark);">
+            <strong>Сравните:</strong><br>
+            He traído mi tesis para que <strong>usted la corrija</strong> (разные подлежащие).<br>
+            He traído mi tesis para <strong>corregir</strong> las faltas (одно подлежащее).
+        </div>
+    </div>
+
+    <div class="exercise-block pink-border">
+        <h3>Práctica 4: De Fin</h3>
+        <ol class="exercise-list">
+            <li>Te explico la teoría otra vez para que tú lo <span class="blank">______</span> (entender) bien.
+                <button class="btn-reveal" onclick="reveal('p1')">Ver</button><span class="answer" id="p1">entiendas (Subjuntivo)</span>
+            </li>
+            <li>Estudio biología para <span class="blank">______</span> (ser) una buena científica.
+                <button class="btn-reveal" onclick="reveal('p2')">Ver</button><span class="answer" id="p2">ser (Infinitivo - sujeto es el mismo "yo")</span>
+            </li>
+            <li>Le dejé mis apuntes a mi amiga para que ella <span class="blank">______</span> (aprobar) el examen.
+                <button class="btn-reveal" onclick="reveal('p3')">Ver</button><span class="answer" id="p3">aprobara (Imperfecto Subj - главное в прошлом)</span>
+            </li>
+            <li>El profesor habla alto a fin de que todos los alumnos le <span class="blank">______</span> (escuchar).
+                <button class="btn-reveal" onclick="reveal('p4')">Ver</button><span class="answer" id="p4">escuchen (Presente Subj)</span>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+<script>
+    function reveal(id) {
+        const el = document.getElementById(id);
+        el.classList.toggle('show');
+    }
+</script>
+
+</body>
+</html>
